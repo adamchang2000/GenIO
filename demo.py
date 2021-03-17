@@ -58,12 +58,10 @@ def sim_loop(args):
         #main loop
         while True:
             world.wait_for_tick(10)
-            world.tick()
 
     finally:
         if world is not None:
             world.destroy()
-        pass
 
 # ==============================================================================
 # -- main() --------------------------------------------------------------

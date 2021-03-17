@@ -45,15 +45,19 @@ class ScenarioGenerator():
         """
         self.world = world
         self.query_string = query_string
-        self.generate_scenario(self.query_string)
+        self.generate_scenario_from_query(self.query_string)
 
-    def generate_scenario(self, query_string):
+    def generate_scenario_from_query(self, query_string):
         """destroys current world and generates with new query_string"""
         logging.info("generating scenario with query string: " + " ".join(query_string))
         pass
     
     def regenerate_scenario(self):
         """destroys current world and regenerates with same query_string"""
-        self.generate_scenario(self.query_string)
+        self.generate_scenario_from_query(self.query_string)
+
+    def generate_traffic_scenario(self):
+        """generates a scenario with traffic on road"""
+        
 
     

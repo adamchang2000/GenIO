@@ -35,6 +35,7 @@ except IndexError:
 import carla
 
 from SensorManager import CameraManager
+from WeatherManager import WeatherManager
 
 class World(object):
     """ Class representing the surrounding environment """
@@ -51,7 +52,7 @@ class World(object):
             sys.exit(1)
         self.player = None
         self.camera_manager = None
-        self._weather_index = 0
+        self.weather_manager = WeatherManager(self.world)
         self.restart(args)
         self.recording_enabled = False
         self.recording_start = 0
@@ -95,9 +96,6 @@ class World(object):
 
     def wait_for_tick(self, timeout=10):
         return self.world.wait_for_tick(timeout)
-
-    def tick(self):
-
 
     def destroy(self):
         """Destroys all actors"""

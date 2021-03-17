@@ -47,12 +47,10 @@ class WeatherManager():
         world is object of type carla.world
         """
         self.world = world
-        self._weather_presets = find_weather_presets()
+        self.weather_presets = find_weather_presets()
+        self.weather_parameters = self.world.get_weather()
+    
+    def random_preset_weather(self):
+        self.world.set_weather(random.choice(self.weather_presets))
 
-    def next_weather(self, reverse=False):
-        """Get next weather setting"""
-        self._weather_index += -1 if reverse else 1
-        self._weather_index %= len(self._weather_presets)
-        preset = self._weather_presets[self._weather_index]
-        self.hud.notification('Weather: %s' % preset[1])
-        self.player.get_world().set_weather(preset[0])
+    
