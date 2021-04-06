@@ -12,6 +12,7 @@ import glob
 import os
 import sys
 import time
+import random
 
 try:
     sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (
@@ -92,7 +93,12 @@ def main():
         '--car-lights-on',
         action='store_true',
         default=False,
-        help='Enanble car lights')
+        help='Enable car lights')
+    argparser.add_argument(
+        '--query',
+        default='trashbag',
+        help='Query an object'
+    )
     args = argparser.parse_args()
 
     logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
@@ -269,13 +275,13 @@ def main():
 
         # example of how to use parameters
         traffic_manager.global_percentage_speed_difference(30.0)
-
-
-        #spawn in trashbags on top of cars
-        trashbag_bp = world.get_blueprint_library().filter("trashbag")[0]
-
+        
         batch = []
-        trash_bags = []
+        object_spawns = []
+        try:
+            object_bp = random.choice(world.get_blueprint_library().filter('*' + args.query + '*'))
+        except:
+            raise RuntimeError('invalid query')
 
         for car_id in vehicles_list:
             car = world.get_actor(car_id)
@@ -285,16 +291,16 @@ def main():
                 perturb = random.rand(3) / 1.5
                 car_loc.x += perturb[0] / 4.
                 car_loc.y += perturb[1] / 4.
-                car_loc.z += (0.5 + perturb[2])
+                car_loc.z += (1.0 + perturb[2])
 
-                batch.append(SpawnActor(trashbag_bp, carla.Transform(car_loc, car_transform.rotation))
+                batch.append(SpawnActor(object_bp, carla.Transform(car_loc, car_transform.rotation))
                     .then(SetPhysics(FutureActor, True)))
 
         for response in client.apply_batch_sync(batch, synchronous_master):
             if response.error:
                 logging.error(response.error)
             else:
-                trash_bags.append(response.actor_id)
+                object_spawns.append(response.actor_id)
 
         while True:
             if args.sync and synchronous_master:
@@ -320,8 +326,8 @@ def main():
         print('\ndestroying %d walkers' % len(walkers_list))
         client.apply_batch([carla.command.DestroyActor(x) for x in all_id])
 
-        print('\ndestroying %d trash bags' % len(trash_bags))
-        client.apply_batch([carla.command.DestroyActor(x) for x in trash_bags])
+        print('\ndestroying %d objects' % len(object_spawns))
+        client.apply_batch([carla.command.DestroyActor(x) for x in object_spawns])
 
         time.sleep(0.5)
 
