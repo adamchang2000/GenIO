@@ -95,9 +95,15 @@ class World(object):
         self.camera_manager.set_sensor(cam_index, notify=False)
 
     def wait_for_tick(self, timeout=10):
-        return self.world.wait_for_tick(timeout)
+        tick = self.world.wait_for_tick(timeout)
+        self.weather_manager.tick(tick)
+        return tick
+
+    def generate_weather_with_tokens(self, weather_tokens):
+        self.weather_manager.generate_weather_with_tokens(weather_tokens)
 
     def destroy(self):
+        print('destroying world')
         """Destroys all actors"""
         actors = [
             self.camera_manager.sensor,

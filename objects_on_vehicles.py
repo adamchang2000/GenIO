@@ -95,7 +95,7 @@ def main():
         default=False,
         help='Enable car lights')
     argparser.add_argument(
-        '--query',
+        '--query_object',
         default='trashbag',
         help='Query an object'
     )
@@ -279,9 +279,9 @@ def main():
         batch = []
         object_spawns = []
         try:
-            object_bp = random.choice(world.get_blueprint_library().filter('*' + args.query + '*'))
+            object_bp = random.choice(world.get_blueprint_library().filter('*' + args.query_object + '*'))
         except:
-            raise RuntimeError('invalid query')
+            raise RuntimeError('invalid query object')
 
         for car_id in vehicles_list:
             car = world.get_actor(car_id)
