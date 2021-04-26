@@ -164,7 +164,7 @@ class Weather(object):
             self._sun.set_dusk()
 
     def __str__(self):
-        return '%s %s' % (self._sun, self._storm)
+        return '%s %s' % (self._sun, self._weatherconditions)
 
 class WeatherManager():
     def __init__(self, world, update_freq=0.1, speed=1.0):
