@@ -138,7 +138,7 @@ class Weather(object):
         if weather_type == 0:
             self._weatherconditions.set_sunny()
         elif weather_type == 1:
-            self._weatherconditions.set_cloud()
+            self._weatherconditions.set_cloudy()
         elif weather_type == 2:
             self._weatherconditions.set_windy()
         elif weather_type == 3:
