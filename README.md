@@ -12,7 +12,13 @@ Using CARLA to build a simulator.
 
 3.  `WorldManager.py`: manages world conditions
 
-4.  `sensors.py`: manages sensors  
+4.  `WeatherManager.py`: manages weather
+
+5.  `ScenarioGeneration.py`: manages scenario generation with NLP
+
+6.  `SensorManager.py`: manages sensors
+
+7.  `requirements.txt`: pip package requirements
 
 ## How to install:
 
