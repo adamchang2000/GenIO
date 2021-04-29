@@ -8,14 +8,6 @@ import re
 import sys
 import weakref
 
-# try:
-#     import pygame
-#     from pygame.locals import KMOD_CTRL
-#     from pygame.locals import K_ESCAPE
-#     from pygame.locals import K_q
-# except ImportError:
-#     raise RuntimeError('cannot import pygame, make sure pygame package is installed')
-
 try:
     import numpy as np
 except ImportError:
