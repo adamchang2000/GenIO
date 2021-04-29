@@ -1,0 +1,15 @@
+<% if flash[:message] %>
+   <div class="alert alert-danger">
+     <span class="error"><%= flash[:message] %></span>
+   </div>
+<% end %>
+
+<%= form_tag simulator_path, :method => 'post' do %>
+  <div class="form-group row">
+    <p>Here is your test case: <span class="file"><%= @file %></span>
+    </p>
+  </div>
+  <%= image_tag (@file_string), width: "900", align: "middle", class: "mx-auto d-block"%>
+<% end %>
+
+<%= render :template => 'simulator/new' %>

@@ -20,6 +20,8 @@ Using CARLA to build a simulator.
 
 7.  `requirements.txt`: pip package requirements
 
+Visit the Genio-web-app folder to view the front end prototype.
+
 ## How to install:
 
 Do the entire CARLA install process:
@@ -38,7 +40,6 @@ Install spacy vocabulary requirement:
 `python -m spacy download en_core_web_lg`
 
 Run the Python scripts while the simulator is running within Unreal Engine (launch the simulator using `make launch` then pressing play inside UE4).
-
 
 ## Usage:
 
